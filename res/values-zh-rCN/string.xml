@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">别忘了XXX</string>
+    <string name="action_settings">设置</string>
+    <string name="add_forget">增加Forget</string>
+    <string name="exist_forget">现有Forget</string>
+</resources>
