@@ -4,5 +4,8 @@
     <string name="app_name">DoNotForget</string>
     <string name="action_settings">Settings</string>
     <string name="add_forget">Add Forget</string>
-	<string name="exist_forget">Exist Forget</string>
+    <string name="exist_forget">Exist Forget</string>
+    <string name="title_activity_create_forget">Create Forget</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="complete">Complete</string>
 </resources>

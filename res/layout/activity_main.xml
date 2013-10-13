@@ -10,7 +10,7 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/AddForgetButton"
+        android:id="@+id/addForgetButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,11 +19,11 @@
         android:text="@string/add_forget" />
 
     <Button
-        android:id="@+id/ExistForgetButton"
+        android:id="@+id/existForgetButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/AddForgetButton"
-        android:layout_below="@+id/AddForgetButton"
+        android:layout_alignLeft="@+id/addForgetButton"
+        android:layout_below="@+id/addForgetButton"
         android:layout_marginTop="44dp"
         android:text="@string/exist_forget" />
 
