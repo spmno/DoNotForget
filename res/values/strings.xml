@@ -8,4 +8,6 @@
     <string name="title_activity_create_forget">Create Forget</string>
     <string name="hello_world">Hello world!</string>
 	<string name="complete">Complete</string>
+	<string name="name">Name</string>
+	<string name="time">Time</string>
 </resources>

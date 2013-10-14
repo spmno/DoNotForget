@@ -6,4 +6,6 @@
     <string name="exist_forget">现有Forget</string>
     <string name="title_activity_create_forget">新建Forget</string>
     <string name="complete">完成</string>
+    <string name="name">名称</string>
+    <string name="time">提醒时间</string>
 </resources>
