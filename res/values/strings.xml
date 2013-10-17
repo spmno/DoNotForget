@@ -10,4 +10,11 @@
 	<string name="complete">Complete</string>
 	<string name="name">Name</string>
 	<string name="time">Time</string>
+	<string name="setting">Setting</string>
+	<string name="remind_time">Remind Time</string>
+	<string name="select_event">Select Event</string>
+	<string name="icon_use">icon</string>
+	<string name="business">Business</string>
+	<string name="trip">Trip</string>
+	<string name="other">Other</string>
 </resources>
