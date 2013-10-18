@@ -18,6 +18,8 @@ public class CreateForgetActivity extends Activity {
 		forgetExpandableListView = (ExpandableListView)findViewById(R.id.forgetExpandableListView);
 		forgetListViewAdapter = new ForgetCreateListAdapter(this);
 		forgetExpandableListView.setAdapter(forgetListViewAdapter);
+		forgetExpandableListView.expandGroup(0);
+		forgetExpandableListView.expandGroup(1);
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,15 +39,44 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		if (groupPosition == 1) {
-			if (childPosition == 1) {
-				LinearLayout linerLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
-				TextView remindTitle = (TextView)linerLayout.findViewById(R.id.remindImageView);
-				ImageView remindIcon = (ImageView)linerLayout.findViewById(R.id.remindImageView);
-				TimePicker remindTimer = (TimePicker)linerLayout.findViewById(R.id.remindTimePicker);
-				remindTitle.setText(context.getString(R.string.time));
+		if (groupPosition == 0) {
+			if (childPosition == 0) {
+				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
+				TextView remindTimeTitle = (TextView)linearLayout.findViewById(R.id.remindTextView);
+				ImageView remindTimeIcon = (ImageView)linearLayout.findViewById(R.id.remindImageView);
+				TimePicker remindTimer = (TimePicker)linearLayout.findViewById(R.id.remindTimePicker);
+				remindTimeTitle.setText(context.getString(R.string.time));
+				//linearLayout.addView(remindTimeTitle);
+				//linearLayout.addView(remindTimeIcon);
+				//linearLayout.addView(remindTimer);
+				return linearLayout;
+			} else if (childPosition == 1) {
+				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_place, null);
+				TextView remindPlaceTitle = (TextView)linearLayout.findViewById(R.id.placeTitleTextView);
+				ImageView remindPlaceIcon = (ImageView)linearLayout.findViewById(R.id.placeTitleImageView);
+				EditText remindPlaceName = (EditText)linearLayout.findViewById(R.id.placeName);
+				//linearLayout.addView(remindPlaceTitle);
+				//linearLayout.addView(remindPlaceIcon);
+				//linearLayout.addView(remindPlaceName);
+				return linearLayout;
+			} else if (childPosition == 2) {
+				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
+				TextView remindEventTitle = (TextView)linearLayout.findViewById(R.id.eventTitleTextView);
+				Button businessButton = (Button)linearLayout.findViewById(R.id.businessButton);
+				Button tripButton = (Button)linearLayout.findViewById(R.id.tripButton);
+				Button otherButton = (Button)linearLayout.findViewById(R.id.otherButton);
+				//linearLayout.addView(remindEventTitle);
+				//linearLayout.addView(businessButton);
+				//linearLayout.addView(tripButton);
+				//linearLayout.addView(otherButton);
+				return linearLayout;
 			}
 			
+		} else if (groupPosition == 1) {
+			Button addForgetButton = new Button(context);
+			String addText = context.getString(R.string.add_forget);
+			addForgetButton.setText(addText);
+			return addForgetButton;
 		}
 		
 		
@@ -82,7 +113,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		RelativeLayout layout = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.group_create_forget, null);
 		TextView groupTitleTextView = (TextView)layout.findViewById(R.id.groupTitle);
-		String groupTitle = context.getString(R.string.setting);
+		String groupTitle = group[groupPosition];//context.getString(R.string.setting);
 		groupTitleTextView.setText(groupTitle);
 		return layout;
 	}

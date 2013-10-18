@@ -12,6 +12,7 @@
 	<string name="time">Time</string>
 	<string name="setting">Setting</string>
 	<string name="remind_time">Remind Time</string>
+	<string name="remind_place">Remind Place</string>
 	<string name="select_event">Select Event</string>
 	<string name="icon_use">icon</string>
 	<string name="business">Business</string>
