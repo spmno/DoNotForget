@@ -26,6 +26,10 @@
             android:name="com.spmno.donotforget.CreateForgetActivity"
             android:label="@string/title_activity_create_forget" >
         </activity>
+        <activity
+            android:name="com.spmno.donotforget.CreateForgetItemActivity"
+            android:label="@string/title_activity_create_forget_item" >
+        </activity>
     </application>
 
 </manifest>

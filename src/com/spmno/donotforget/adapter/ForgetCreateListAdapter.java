@@ -1,9 +1,12 @@
 package com.spmno.donotforget.adapter;
 
+import com.spmno.donotforget.CreateForgetItemActivity;
 import com.spmno.donotforget.R;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
@@ -76,6 +79,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			Button addForgetButton = new Button(context);
 			String addText = context.getString(R.string.add_forget);
 			addForgetButton.setText(addText);
+			addForgetButton.setOnClickListener(new CreateButtonListener());
 			return addForgetButton;
 		}
 		
@@ -128,6 +132,16 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	class CreateButtonListener implements OnClickListener {
+		
+		@Override
+		public void onClick(View view) {
+			Intent intent = new Intent();
+			intent.setClass(context, CreateForgetItemActivity.class);
+			context.startActivity(intent);
+		}
 	}
 
 }
