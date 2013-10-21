@@ -1,0 +1,25 @@
+<%= form_for(@dish_kind) do |f| %>
+  <% if @dish_kind.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dish_kind.errors.count, "error") %> prohibited this dish_kind from being saved:</h2>
+
+      <ul>
+      <% @dish_kind.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <%= f.label :name, (I18n.t"name") %><br />
+    <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <lable><%= I18n.t"image" %></lable>
+      <%= f.file_field :photo %>
+    </div>
+  <div class="actions">
+    <%= f.submit(I18n.t"create_dish_kind") %>
+  </div>
+<% end %>

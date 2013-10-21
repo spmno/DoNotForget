@@ -1,0 +1,52 @@
+<h1 xmlns="http://www.w3.org/1999/html"><%= I18n.t"edit_page" %></h1>
+
+<%= form_for(@page) do |f| %>
+    <% if @page.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+          <ul>
+            <% @page.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= f.label :name, (I18n.t("name")) %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <!--
+    <%= f.label :photo %><br />
+    <%= f.text_field :photo %>
+    -->
+      <lable><%= I18n.t"image" %></lable>
+      <%= f.text_field :photo %>
+    </div>
+
+    <%= f.label :kind_id, (I18n.t"kind") %><br />
+    <%= f.select :dish_kind_id, options_from_collection_for_select(DishKind.all, 'id', 'name'), {prompt:"选择种类"} %>
+
+
+    <div class="display_items">
+      <label>子项</label>
+      <br/>
+      <% @display_items.each do |item| %>
+        <%= I18n.t"dish_id" %>:<%= item.dish_id %> <%= I18n.t"page_id" %>:<%= item.page_id %>
+        </br>
+      <% end %>
+    </div>
+
+    <%= link_to (I18n.t"add_sub_item"), {controller: "display_items", action:"new", id:@page_id} %>
+
+    <div class="actions">
+      <%= f.submit(I18n.t("create_page")) %>
+    </div>
+<% end %>
+
+
+<%= link_to (I18n.t"show"), @page %> |
+<%= link_to (I18n.t"back"), pages_path %>
