@@ -8,9 +8,9 @@ import com.j256.ormlite.field.DatabaseField;
 
 public class Forget implements Serializable {
 	
-	@DatabaseField(id=true)
+	@DatabaseField(generatedId=true)
 	private String forgetNo;
-	@DatabaseField
+	@DatabaseField(canBeNull=false)
 	private String name;
 	@DatabaseField
 	private Time time;

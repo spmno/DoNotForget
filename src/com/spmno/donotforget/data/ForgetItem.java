@@ -4,10 +4,10 @@ import java.io.Serializable;
 import com.j256.ormlite.field.DatabaseField;
 
 public class ForgetItem implements Serializable {
-	@DatabaseField(id=true) 
+	@DatabaseField(generatedId=true) 
 	private String forgetItemNo;
-	@DatabaseField
+	@DatabaseField(canBeNull=false)
 	private String name;
-	@DatabaseField
-	private String forgetId;
+	@DatabaseField(foreign=true)
+	private Forget forget;
 }

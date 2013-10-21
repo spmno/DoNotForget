@@ -4,11 +4,13 @@ import com.spmno.donotforget.adapter.ForgetCreateListAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.widget.ExpandableListView;
 
 public class CreateForgetActivity extends Activity {
 
+	private static final int REQUESTCODE1 = 0;
 	private ExpandableListView forgetExpandableListView; 
 	private ForgetCreateListAdapter forgetListViewAdapter;
 	@Override
@@ -29,4 +31,9 @@ public class CreateForgetActivity extends Activity {
 		return true;
 	}
 
+	@Override 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		String forgetItemName = data.getStringExtra("forgetItemName");
+		forgetListViewAdapter.addForgetItem(forgetItemName);
+	}
 }

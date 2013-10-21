@@ -19,5 +19,6 @@
     <string name="trip">Trip</string>
     <string name="other">Other</string>
     <string name="title_activity_create_forget_item">CreateForgetItemActivity</string>
+    <string name="title_activity_exist_forget">ExistForgetActivity</string>
 
 </resources>

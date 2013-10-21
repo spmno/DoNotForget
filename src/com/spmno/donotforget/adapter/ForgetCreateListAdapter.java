@@ -1,5 +1,7 @@
 package com.spmno.donotforget.adapter;
 
+import java.util.ArrayList;
+
 import com.spmno.donotforget.CreateForgetItemActivity;
 import com.spmno.donotforget.R;
 import android.content.Context;
@@ -20,6 +22,7 @@ import android.widget.TimePicker;
 public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 
 	private String[] group = {"…Ë÷√", "ŒÔ∆∑List" };
+	private ArrayList<String> forgetItemArrayList;
 	private int[] childCount = {3, 1};
 	private Context context;
 	public ForgetCreateListAdapter(Context context) {
@@ -76,11 +79,18 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			}
 			
 		} else if (groupPosition == 1) {
-			Button addForgetButton = new Button(context);
-			String addText = context.getString(R.string.add_forget);
-			addForgetButton.setText(addText);
-			addForgetButton.setOnClickListener(new CreateButtonListener());
-			return addForgetButton;
+			if (childPosition == forgetItemArrayList.size()) {
+				Button addForgetButton = new Button(context);
+				String addText = context.getString(R.string.add_forget);
+				addForgetButton.setText(addText);
+				addForgetButton.setOnClickListener(new CreateButtonListener());
+				return addForgetButton;
+			} else {
+				TextView forgetItemTextView = new TextView(context);
+				String forgetItemName = forgetItemArrayList.get(childPosition);
+				forgetItemTextView.setText(forgetItemName);
+			}
+
 		}
 		
 		
@@ -132,6 +142,10 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void addForgetItem(String forgetItemName) {
+		forgetItemArrayList.add(forgetItemName);
 	}
 	
 	class CreateButtonListener implements OnClickListener {
