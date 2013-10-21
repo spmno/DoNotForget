@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.spmno.donotforget.CreateForgetItemActivity;
 import com.spmno.donotforget.R;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,8 +26,8 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	private String[] group = {"…Ë÷√", "ŒÔ∆∑List" };
 	private ArrayList<String> forgetItemArrayList;
 	private int[] childCount = {3, 1};
-	private Context context;
-	public ForgetCreateListAdapter(Context context) {
+	private Activity context;
+	public ForgetCreateListAdapter(Activity context) {
 		this.context = context;
 	}
 	
@@ -154,7 +156,8 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		public void onClick(View view) {
 			Intent intent = new Intent();
 			intent.setClass(context, CreateForgetItemActivity.class);
-			context.startActivity(intent);
+			//context.startActivity(intent);
+			context.startActivityForResult(intent, 1);
 		}
 	}
 

@@ -4,6 +4,7 @@ import com.spmno.donotforget.data.ForgetDataCache;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -29,9 +30,15 @@ public class CreateForgetItemActivity extends Activity {
 	}
 	
 	public void completeItem(View view) {
-		ForgetDataCache forgetDataCache = ForgetDataCache.getInstance();
+		//ForgetDataCache forgetDataCache = ForgetDataCache.getInstance();
 		String itemName = forgetItemEditText.getText().toString();
-		forgetDataCache.addForgetItem(itemName);
+		//forgetDataCache.addForgetItem(itemName);
+		Intent intent = getIntent();
+		Bundle bundle = new Bundle(); 
+        bundle.putString("itemName", itemName);
+        intent.putExtras(bundle);
+        setResult(0, intent);
+        finish();
 	}
 
 }
