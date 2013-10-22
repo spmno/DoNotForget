@@ -35,7 +35,7 @@ public class CreateForgetItemActivity extends Activity {
 		//forgetDataCache.addForgetItem(itemName);
 		Intent intent = getIntent();
 		Bundle bundle = new Bundle(); 
-        bundle.putString("itemName", itemName);
+        bundle.putString("forgetItemName", itemName);
         intent.putExtras(bundle);
         setResult(0, intent);
         finish();

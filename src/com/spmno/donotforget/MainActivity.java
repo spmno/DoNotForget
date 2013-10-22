@@ -1,5 +1,7 @@
 package com.spmno.donotforget;
 
+import com.spmno.donotforget.data.DataBaseHelper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +22,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		createNewForgetButton.setOnClickListener(this);
 		existForgetButton.setOnClickListener(this);
-		
+		DataBaseHelper.initOpenHelper(this);
 	}
 
 	@Override

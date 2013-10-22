@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 
-public class CreateForgetActivity extends Activity {
+public class CreateForgetActivity extends Activity implements OnClickListener {
 
 	private static final int REQUESTCODE1 = 0;
 	private ExpandableListView forgetExpandableListView; 
@@ -20,8 +24,19 @@ public class CreateForgetActivity extends Activity {
 		forgetExpandableListView = (ExpandableListView)findViewById(R.id.forgetExpandableListView);
 		forgetListViewAdapter = new ForgetCreateListAdapter(this);
 		forgetExpandableListView.setAdapter(forgetListViewAdapter);
+		// do not response for group click event
+		forgetExpandableListView.setOnGroupClickListener(new OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				return true;
+			}
+		});
+		// delete group expandable icon
+		forgetExpandableListView.setGroupIndicator(null);
 		forgetExpandableListView.expandGroup(0);
 		forgetExpandableListView.expandGroup(1);
+		Button completeButton = (Button)findViewById(R.id.forgetComplete);
+		completeButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -35,5 +50,10 @@ public class CreateForgetActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		String forgetItemName = data.getStringExtra("forgetItemName");
 		forgetListViewAdapter.addForgetItem(forgetItemName);
+	}
+	
+	@Override
+	public void onClick(View view) {
+		forgetListViewAdapter.saveDataToDatabase();
 	}
 }

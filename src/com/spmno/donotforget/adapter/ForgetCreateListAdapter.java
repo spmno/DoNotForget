@@ -1,9 +1,14 @@
 package com.spmno.donotforget.adapter;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.j256.ormlite.dao.Dao;
 import com.spmno.donotforget.CreateForgetItemActivity;
 import com.spmno.donotforget.R;
+import com.spmno.donotforget.data.DataBaseHelper;
+import com.spmno.donotforget.data.Forget;
+import com.spmno.donotforget.data.ForgetItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,8 +32,15 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	private ArrayList<String> forgetItemArrayList;
 	private int[] childCount = {3, 1};
 	private Activity context;
+	
+	// useful control
+	TimePicker remindTimerTimePicker;
+	EditText remindPlaceNameEditText;
+	EditText remindNameEditText;
+	
 	public ForgetCreateListAdapter(Activity context) {
 		this.context = context;
+		forgetItemArrayList = new ArrayList<String>();
 	}
 	
 	@Override
@@ -52,7 +64,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
 				TextView remindTimeTitle = (TextView)linearLayout.findViewById(R.id.remindTextView);
 				ImageView remindTimeIcon = (ImageView)linearLayout.findViewById(R.id.remindImageView);
-				TimePicker remindTimer = (TimePicker)linearLayout.findViewById(R.id.remindTimePicker);
+				remindTimerTimePicker = (TimePicker)linearLayout.findViewById(R.id.remindTimePicker);
 				remindTimeTitle.setText(context.getString(R.string.time));
 				//linearLayout.addView(remindTimeTitle);
 				//linearLayout.addView(remindTimeIcon);
@@ -62,7 +74,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_place, null);
 				TextView remindPlaceTitle = (TextView)linearLayout.findViewById(R.id.placeTitleTextView);
 				ImageView remindPlaceIcon = (ImageView)linearLayout.findViewById(R.id.placeTitleImageView);
-				EditText remindPlaceName = (EditText)linearLayout.findViewById(R.id.placeName);
+				remindPlaceNameEditText = (EditText)linearLayout.findViewById(R.id.placeName);
 				//linearLayout.addView(remindPlaceTitle);
 				//linearLayout.addView(remindPlaceIcon);
 				//linearLayout.addView(remindPlaceName);
@@ -70,9 +82,10 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			} else if (childPosition == 2) {
 				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
 				TextView remindEventTitle = (TextView)linearLayout.findViewById(R.id.eventTitleTextView);
-				Button businessButton = (Button)linearLayout.findViewById(R.id.businessButton);
-				Button tripButton = (Button)linearLayout.findViewById(R.id.tripButton);
-				Button otherButton = (Button)linearLayout.findViewById(R.id.otherButton);
+				remindNameEditText = (EditText)linearLayout.findViewById(R.id.forgetNameTextView);
+				//Button businessButton = (Button)linearLayout.findViewById(R.id.businessButton);
+				//Button tripButton = (Button)linearLayout.findViewById(R.id.tripButton);
+				//Button otherButton = (Button)linearLayout.findViewById(R.id.otherButton);
 				//linearLayout.addView(remindEventTitle);
 				//linearLayout.addView(businessButton);
 				//linearLayout.addView(tripButton);
@@ -91,6 +104,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 				TextView forgetItemTextView = new TextView(context);
 				String forgetItemName = forgetItemArrayList.get(childPosition);
 				forgetItemTextView.setText(forgetItemName);
+				return forgetItemTextView;
 			}
 
 		}
@@ -148,6 +162,37 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	
 	public void addForgetItem(String forgetItemName) {
 		forgetItemArrayList.add(forgetItemName);
+		notifyDataSetChanged();
+	}
+	
+	public boolean saveDataToDatabase() {
+		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
+		Dao<Forget, Integer>forgetDao = databaseHelper.getForgetDao();
+		Forget forget = new Forget();
+		String remindName = remindNameEditText.getText().toString();
+		forget.setName(remindName);
+		
+		try {
+			forgetDao.create(forget);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		Dao<ForgetItem, Integer>forgetItemDao = databaseHelper.getForgetItemDao();
+		for (String itemName : forgetItemArrayList) {
+			ForgetItem forgetItem = new ForgetItem();
+			forgetItem.setName(itemName);
+			forgetItem.setForgetId(forget);
+			try {
+				forgetItemDao.create(forgetItem);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	class CreateButtonListener implements OnClickListener {
