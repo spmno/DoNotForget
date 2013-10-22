@@ -9,6 +9,13 @@
          android:layout_width="wrap_content" 
          android:text="@string/select_event"
         />
+        <EditText 
+		    android:id="@+id/forgetNameTextView"
+		    android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:inputType="text"
+		    />
+        <!--  
         <Button 
          android:id="@+id/businessButton"
          android:layout_height="wrap_content"
@@ -29,6 +36,7 @@
          android:layout_width="wrap_content" 
          android:text="@string/other"
             />
+		-->
 
 
 </LinearLayout>
