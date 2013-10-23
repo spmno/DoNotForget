@@ -34,13 +34,44 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	private Activity context;
 	
 	// useful control
-	TimePicker remindTimerTimePicker;
+	LinearLayout timePickerLinearLayout;
+	LinearLayout placeLinearLayout;
+	LinearLayout nameLinearLayout;
+	TimePicker remindTimePicker;
 	EditText remindPlaceNameEditText;
 	EditText remindNameEditText;
+	Button addForgetButton;
 	
 	public ForgetCreateListAdapter(Activity context) {
 		this.context = context;
 		forgetItemArrayList = new ArrayList<String>();
+		initAdapterView();
+	}
+	
+	public void initAdapterView() {
+		//time
+		timePickerLinearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
+		TextView remindTimeTitle = (TextView)timePickerLinearLayout.findViewById(R.id.remindTextView);
+		ImageView remindTimeIcon = (ImageView)timePickerLinearLayout.findViewById(R.id.remindImageView);
+		remindTimePicker = (TimePicker)timePickerLinearLayout.findViewById(R.id.remindTimePicker);
+		remindTimeTitle.setText(context.getString(R.string.time));
+		
+		//place
+		placeLinearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_place, null);
+		TextView remindPlaceTitle = (TextView)placeLinearLayout.findViewById(R.id.placeTitleTextView);
+		ImageView remindPlaceIcon = (ImageView)placeLinearLayout.findViewById(R.id.placeTitleImageView);
+		remindPlaceNameEditText = (EditText)placeLinearLayout.findViewById(R.id.placeName);
+		
+		//name
+		nameLinearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
+		TextView remindEventTitle = (TextView)nameLinearLayout.findViewById(R.id.eventTitleTextView);
+		remindNameEditText = (EditText)nameLinearLayout.findViewById(R.id.forgetNameTextView);
+		
+		//add button
+		addForgetButton = new Button(context);
+		String addText = context.getString(R.string.add_forget);
+		addForgetButton.setText(addText);
+		addForgetButton.setOnClickListener(new CreateButtonListener());
 	}
 	
 	@Override
@@ -61,28 +92,18 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		if (groupPosition == 0) {
 			if (childPosition == 0) {
-				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
-				TextView remindTimeTitle = (TextView)linearLayout.findViewById(R.id.remindTextView);
-				ImageView remindTimeIcon = (ImageView)linearLayout.findViewById(R.id.remindImageView);
-				remindTimerTimePicker = (TimePicker)linearLayout.findViewById(R.id.remindTimePicker);
-				remindTimeTitle.setText(context.getString(R.string.time));
+
 				//linearLayout.addView(remindTimeTitle);
 				//linearLayout.addView(remindTimeIcon);
 				//linearLayout.addView(remindTimer);
-				return linearLayout;
+				return timePickerLinearLayout;
 			} else if (childPosition == 1) {
-				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_place, null);
-				TextView remindPlaceTitle = (TextView)linearLayout.findViewById(R.id.placeTitleTextView);
-				ImageView remindPlaceIcon = (ImageView)linearLayout.findViewById(R.id.placeTitleImageView);
-				remindPlaceNameEditText = (EditText)linearLayout.findViewById(R.id.placeName);
 				//linearLayout.addView(remindPlaceTitle);
 				//linearLayout.addView(remindPlaceIcon);
 				//linearLayout.addView(remindPlaceName);
-				return linearLayout;
+				return placeLinearLayout;
 			} else if (childPosition == 2) {
-				LinearLayout linearLayout = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
-				TextView remindEventTitle = (TextView)linearLayout.findViewById(R.id.eventTitleTextView);
-				remindNameEditText = (EditText)linearLayout.findViewById(R.id.forgetNameTextView);
+				
 				//Button businessButton = (Button)linearLayout.findViewById(R.id.businessButton);
 				//Button tripButton = (Button)linearLayout.findViewById(R.id.tripButton);
 				//Button otherButton = (Button)linearLayout.findViewById(R.id.otherButton);
@@ -90,15 +111,11 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 				//linearLayout.addView(businessButton);
 				//linearLayout.addView(tripButton);
 				//linearLayout.addView(otherButton);
-				return linearLayout;
+				return nameLinearLayout;
 			}
 			
 		} else if (groupPosition == 1) {
 			if (childPosition == forgetItemArrayList.size()) {
-				Button addForgetButton = new Button(context);
-				String addText = context.getString(R.string.add_forget);
-				addForgetButton.setText(addText);
-				addForgetButton.setOnClickListener(new CreateButtonListener());
 				return addForgetButton;
 			} else {
 				TextView forgetItemTextView = new TextView(context);
@@ -108,7 +125,6 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			}
 
 		}
-		
 		
 		return null;
 	}
@@ -170,7 +186,11 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		Dao<Forget, Integer>forgetDao = databaseHelper.getForgetDao();
 		Forget forget = new Forget();
 		String remindName = remindNameEditText.getText().toString();
+		Integer minute = remindTimePicker.getCurrentMinute();
+		Integer hour = remindTimePicker.getCurrentMinute();
 		forget.setName(remindName);
+		forget.setMinute(minute);
+		forget.setHour(hour);
 		
 		try {
 			forgetDao.create(forget);

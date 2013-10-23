@@ -37,7 +37,7 @@ public class CreateForgetItemActivity extends Activity {
 		Bundle bundle = new Bundle(); 
         bundle.putString("forgetItemName", itemName);
         intent.putExtras(bundle);
-        setResult(0, intent);
+        setResult(1, intent);
         finish();
 	}
 

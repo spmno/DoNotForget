@@ -5,6 +5,7 @@ import com.spmno.donotforget.adapter.ForgetCreateListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,7 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 public class CreateForgetActivity extends Activity implements OnClickListener {
 
 	private static final int REQUESTCODE1 = 0;
+	private static final String TAG = "forget";
 	private ExpandableListView forgetExpandableListView; 
 	private ForgetCreateListAdapter forgetListViewAdapter;
 	@Override
@@ -48,12 +50,19 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 
 	@Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		String forgetItemName = data.getStringExtra("forgetItemName");
-		forgetListViewAdapter.addForgetItem(forgetItemName);
+		if (resultCode == 1) {
+			String forgetItemName = data.getStringExtra("forgetItemName");
+			forgetListViewAdapter.addForgetItem(forgetItemName);
+		}
 	}
 	
 	@Override
 	public void onClick(View view) {
 		forgetListViewAdapter.saveDataToDatabase();
+	}
+	
+	@Override
+	public void onRestart() {
+		Log.e(TAG, "start onRestart~~~");  
 	}
 }

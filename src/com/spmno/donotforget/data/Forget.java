@@ -6,7 +6,7 @@ import android.text.format.Time;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class Forget implements Serializable {
+public class Forget {
 	
 	@DatabaseField(generatedId=true)
 	private int id;
@@ -14,14 +14,12 @@ public class Forget implements Serializable {
 	private String name;
 	@DatabaseField(useGetSet=true)
 	private String place;
-	public String getPlace() {
-		return place;
-	}
-	public void setPlace(String place) {
-		this.place = place;
-	}
+
 	@DatabaseField(useGetSet=true)
-	private Time time;
+	private int hour;
+	@DatabaseField(useGetSet=true)
+	private int minute;
+	
 	
 	public int getId() {
 		return id;
@@ -35,10 +33,22 @@ public class Forget implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Time getTime() {
-		return time;
+	public int getHour() {
+		return hour;
 	}
-	public void setTime(Time time) {
-		this.time = time;
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+	public int getMinute() {
+		return minute;
+	}
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 }
