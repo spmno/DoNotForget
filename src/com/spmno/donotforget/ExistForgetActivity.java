@@ -13,7 +13,11 @@ import com.spmno.donotforget.data.Forget;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ExistForgetActivity extends Activity {
@@ -26,7 +30,7 @@ public class ExistForgetActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exist_forget);
 		forgetListView = (ListView)findViewById(R.id.forgetListView);
-		
+		forgetListView.setOnItemClickListener(new ExistItemClickListener());
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<Forget, Integer> forgetDao = databaseHelper.getForgetDao();
 		try {
@@ -54,5 +58,20 @@ public class ExistForgetActivity extends Activity {
 	}
 	
 
+	class ExistItemClickListener implements OnItemClickListener {
 
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			ListView listView = (ListView)parent;
+		    HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);
+		    String forgetName = map.get("name");
+		    Intent intent = new Intent();
+		    intent.setClass(ExistForgetActivity.this, ForgetDetailActivity.class);
+		    intent.putExtra("name", forgetName);
+		    startActivity(intent);
+		}
+		
+	}
 }
