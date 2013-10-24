@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -94,6 +93,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 			try {
 				forgetItemDao = getDao(ForgetItem.class);
 			} catch (java.sql.SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

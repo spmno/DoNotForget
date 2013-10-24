@@ -24,7 +24,9 @@
         </activity>
         <activity
             android:name="com.spmno.donotforget.CreateForgetActivity"
-            android:label="@string/title_activity_create_forget" >
+            android:label="@string/title_activity_create_forget"
+            android:windowSoftInputMode="adjustPan"
+             >
         </activity>
         <activity
             android:name="com.spmno.donotforget.CreateForgetItemActivity"

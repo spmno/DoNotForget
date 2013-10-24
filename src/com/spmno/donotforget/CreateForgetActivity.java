@@ -50,6 +50,7 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 
 	@Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 1) {
 			String forgetItemName = data.getStringExtra("forgetItemName");
 			forgetListViewAdapter.addForgetItem(forgetItemName);
@@ -59,10 +60,24 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		forgetListViewAdapter.saveDataToDatabase();
+		finish();
 	}
 	
 	@Override
 	public void onRestart() {
+		super.onRestart();
 		Log.e(TAG, "start onRestart~~~");  
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		forgetListViewAdapter.saveControlData();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		forgetListViewAdapter.recoverControlData();
 	}
 }

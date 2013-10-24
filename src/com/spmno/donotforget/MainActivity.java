@@ -39,11 +39,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			Intent intent = new Intent();
 			intent.setClass(this, CreateForgetActivity.class);
 			startActivity(intent);
-			this.finish();
 			break;
 		}
 		case R.id.existForgetButton: {
-			
+			Intent intent = new Intent();
+			intent.setClass(this, ExistForgetActivity.class);
+			startActivity(intent);
 			break;
 		}
 		}

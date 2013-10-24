@@ -8,7 +8,7 @@ public class ForgetItem  {
 	private int id;
 	@DatabaseField(canBeNull=false, useGetSet=true)
 	private String name;
-	@DatabaseField(foreignColumnName="forget_id", foreign=true, foreignAutoRefresh = true, useGetSet=true)
+	@DatabaseField(foreignColumnName="id", foreign=true, foreignAutoRefresh = true, useGetSet=true)
 	private Forget forgetId;
 	public int getId() {
 		return id;
