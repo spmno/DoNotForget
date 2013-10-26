@@ -46,7 +46,7 @@ public class ForgetDetailActivity extends Activity {
 				item.put("name", forgetItem.getName());
 				items.add(item);
 			}
-			forgetDetailListViewAdapter = new SimpleAdapter(this, items, R.layout.list_exist_forget, new String[]{"name"}, new int[]{R.id.forgetExistListItemTextView});
+			forgetDetailListViewAdapter = new SimpleAdapter(this, items, R.layout.list_detail_forget, new String[]{"name", "isSelect"}, new int[]{R.id.forgetDetailTextView, R.id.forgetDetailCheckBox});
 			forgetDetailListView.setAdapter(forgetDetailListViewAdapter);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
