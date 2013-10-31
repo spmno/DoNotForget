@@ -23,6 +23,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		createNewForgetButton.setOnClickListener(this);
 		existForgetButton.setOnClickListener(this);
 		DataBaseHelper.initOpenHelper(this);
+		startService(new Intent(this, ReminderService.class));
 	}
 
 	@Override

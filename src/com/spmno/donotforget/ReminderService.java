@@ -57,18 +57,27 @@ public class ReminderService extends Service {
 			if (firstForget != null) {
 				Calendar calendar = Calendar.getInstance();
 
-				calendar.set(Calendar.HOUR_OF_DAY, firstForget.getHour());  
-				calendar.set(Calendar.MINUTE, firstForget.getMinute());  
-				calendar.set(Calendar.SECOND, 0);  
+  
 				int nowHour = calendar.get(Calendar.HOUR_OF_DAY);
 				if (nowHour == firstForget.getHour()) {
 					int nowMinute = calendar.get(Calendar.MINUTE);
-					if (nowMinute >= firstForget.getMinute()) {
+					if (nowMinute <= firstForget.getMinute()) {
+						calendar.set(Calendar.HOUR_OF_DAY, firstForget.getHour());  
+						calendar.set(Calendar.MINUTE, firstForget.getMinute());  
+						calendar.set(Calendar.SECOND, 0);
 						calendar.add(Calendar.DATE, 1);
 					}
 				} else if (nowHour > firstForget.getHour()) {
+					calendar.set(Calendar.HOUR_OF_DAY, firstForget.getHour());  
+					calendar.set(Calendar.MINUTE, firstForget.getMinute());  
+					calendar.set(Calendar.SECOND, 0);
 					calendar.add(Calendar.DATE, 1);
+				} else {
+					calendar.set(Calendar.HOUR_OF_DAY, firstForget.getHour());  
+					calendar.set(Calendar.MINUTE, firstForget.getMinute());  
+					calendar.set(Calendar.SECOND, 0);
 				}
+				
 				Date time = calendar.getTime(); 
 				timer.schedule(timerTask, time);
 			}
