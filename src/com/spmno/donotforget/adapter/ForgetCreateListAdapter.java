@@ -38,6 +38,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	TimePicker remindTimePicker;
 	EditText remindPlaceNameEditText;
 	EditText remindNameEditText;
+	Button addForgetButton;
 	String remindName = "";
 	String remindPlace = "";
 	
@@ -121,11 +122,13 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			}
 		} else if (groupPosition == 1) {
 			if (childPosition == forgetItemArrayList.size()) {
-				Button addForgetButton = new Button(context);
-				String addText = context.getString(R.string.add_forget);
-				addForgetButton.setText(addText);
-				addForgetButton.setOnClickListener(new CreateButtonListener());
-				return addForgetButton;
+				if (convertView == null) {
+					convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_add, null);
+					addForgetButton = (Button)convertView.findViewById(R.id.addForgetItemButton);
+					addForgetButton.setOnClickListener(new CreateButtonListener());
+				}
+				
+				return convertView;
 			} else {
 				TextView forgetItemTextView = new TextView(context);
 				String forgetItemName = forgetItemArrayList.get(childPosition);
