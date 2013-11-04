@@ -24,6 +24,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		existForgetButton.setOnClickListener(this);
 		DataBaseHelper.initOpenHelper(this);
 		startService(new Intent(this, ReminderService.class));
+		
+		CrashHandler handler = CrashHandler.getInstance();
+		handler.init(getApplicationContext());
 	}
 
 	@Override
