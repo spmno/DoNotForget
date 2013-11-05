@@ -12,6 +12,7 @@ import com.spmno.donotforget.data.ForgetItem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -133,6 +134,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 				TextView forgetItemTextView = new TextView(context);
 				String forgetItemName = forgetItemArrayList.get(childPosition);
 				forgetItemTextView.setText(forgetItemName);
+				forgetItemTextView.setTextColor(Color.rgb(255, 255, 255));
 				return forgetItemTextView;
 			}
 

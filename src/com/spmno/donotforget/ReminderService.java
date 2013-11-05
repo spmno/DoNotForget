@@ -88,11 +88,22 @@ public class ReminderService extends Service {
 		}
 
 	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		return START_STICKY;
+	}
+	
+	@Override
+	public void onDestroy() {
+		timer.cancel();
+	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
+		return null;
 		// TODO: Return the communication channel to the service.
-		throw new UnsupportedOperationException("Not yet implemented");
+		//throw new UnsupportedOperationException("Not yet implemented");
 	}
 	
 	public void reminder() {
