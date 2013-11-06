@@ -23,17 +23,20 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 public class ReminderService extends Service {
 	private Timer timer;
 	private TimerTask timerTask;
 	final int timeInteral = 1000 * 60;
+	private final IBinder binder = new ReminderBinder();
 	public ReminderService() {
 	}
 	
 	@Override 
 	public void onCreate() {
+		Context appContext = getApplicationContext();
 		timer = new Timer();
 		timerTask = new TimerTask() {
 			@Override
@@ -42,6 +45,7 @@ public class ReminderService extends Service {
 			}
 			
 		};
+		DataBaseHelper.setContext(appContext);
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<Forget, Integer> forgetDao = databaseHelper.getForgetDao();
 		try {
@@ -86,7 +90,7 @@ public class ReminderService extends Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	
 	}
 	
 	@Override
@@ -101,7 +105,7 @@ public class ReminderService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		return null;
+		return binder;
 		// TODO: Return the communication channel to the service.
 		//throw new UnsupportedOperationException("Not yet implemented");
 	}
@@ -125,4 +129,9 @@ public class ReminderService extends Service {
 		notification.defaults |= Notification.DEFAULT_SOUND; //ƒ¨»œ…˘“Ù
 	}
 	
+	public class ReminderBinder extends Binder {
+		ReminderService getService() {
+			return ReminderService.this;
+		}
+	}
 }

@@ -18,12 +18,16 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String TAG = "forget";
     private static DataBaseHelper databaseHelper;
+    private static Context appContext;
     
-	static public void initOpenHelper(Context context) {
-		databaseHelper = new DataBaseHelper(context);
+	static public void setContext(Context context) {
+		appContext = context;
 	}
  
-	public static synchronized DataBaseHelper getInstance(){    
+	public static synchronized DataBaseHelper getInstance(){
+		if (databaseHelper == null) {
+			databaseHelper = new DataBaseHelper(appContext);
+		}
 		return databaseHelper;           
 	}
 	
