@@ -1,10 +1,15 @@
 package com.spmno.donotforget;
 
+import com.spmno.donotforget.ReminderService.ReminderBinder;
 import com.spmno.donotforget.adapter.ForgetCreateListAdapter;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +24,7 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 	private static final String TAG = "forget";
 	private ExpandableListView forgetExpandableListView; 
 	private ForgetCreateListAdapter forgetListViewAdapter;
+	private ReminderService bindService;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +39,9 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 				return true;
 			}
 		});
+		Intent intent = new Intent(this, ReminderService.class);
+		bindService(intent, conn, Context.BIND_AUTO_CREATE);
+		
 		// delete group expandable icon
 		forgetExpandableListView.setGroupIndicator(null);
 		forgetExpandableListView.expandGroup(0);
@@ -60,6 +69,7 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		forgetListViewAdapter.saveDataToDatabase();
+		bindService.reset();
 		finish();
 	}
 	
@@ -80,4 +90,26 @@ public class CreateForgetActivity extends Activity implements OnClickListener {
 		super.onResume();
 		forgetListViewAdapter.recoverControlData();
 	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unbindService(conn);
+	}
+	
+	 private ServiceConnection conn = new ServiceConnection() {
+	        
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+		    // TODO Auto-generated method stub
+		    
+		}
+		
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+		    // TODO Auto-generated method stub
+			ReminderBinder binder = (ReminderBinder)service;
+		    bindService = binder.getService();
+		}
+	 };
 }

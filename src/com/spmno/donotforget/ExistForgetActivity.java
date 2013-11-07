@@ -7,13 +7,17 @@ import java.util.List;
 import java.util.Map;
 
 import com.j256.ormlite.dao.Dao;
+import com.spmno.donotforget.ReminderService.ReminderBinder;
 import com.spmno.donotforget.adapter.ExistForgetListAdapter;
 import com.spmno.donotforget.data.DataBaseHelper;
 import com.spmno.donotforget.data.Forget;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,9 +43,18 @@ public class ExistForgetActivity extends Activity {
 			for (Forget forget : forgets) {
 				Map<String,Object> item = new HashMap<String,Object>();
 				item.put("name", forget.getName());
+				int hour = forget.getHour();
+				int minute = forget.getMinute();
+				String timeContent = String.format("%02d:%02d", hour, minute);
+				item.put("time", timeContent);
 				items.add(item);
 			}
-			forgetListViewAdapter = new ExistForgetListAdapter(this, items, R.layout.list_exist_forget, new String[]{"name"}, new int[]{R.id.forgetExistListItemTextView});
+			forgetListViewAdapter = new ExistForgetListAdapter(
+					this, 
+					items, 
+					R.layout.list_exist_forget, 
+					new String[]{"name", "time"}, 
+					new int[]{R.id.forgetExistListItemTextView, R.id.forgetExistListItemTime});
 			forgetListView.setAdapter(forgetListViewAdapter);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -56,6 +69,8 @@ public class ExistForgetActivity extends Activity {
 		getMenuInflater().inflate(R.menu.exist_forget, menu);
 		return true;
 	}
+	
+
 	
 
 	class ExistItemClickListener implements OnItemClickListener {

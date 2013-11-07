@@ -1,8 +1,14 @@
 package com.spmno.donotforget;
 
+import com.spmno.donotforget.ReminderService.ReminderBinder;
+
 import android.os.Bundle;
+import android.os.IBinder;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,8 +26,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		createNewForgetButton.setOnClickListener(this);
 		existForgetButton.setOnClickListener(this);
-		startService(new Intent(this, ReminderService.class));
-		
+		//startService(new Intent(this, ReminderService.class));
+		Intent intent = new Intent(this, ReminderService.class);
+		bindService(intent, conn, Context.BIND_AUTO_CREATE);
 		CrashHandler handler = CrashHandler.getInstance();
 		handler.init(getApplicationContext());
 	}
@@ -54,6 +61,22 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		stopService(new Intent(this, ReminderService.class));
+		unbindService(conn);
 	}
+	
+	 private ServiceConnection conn = new ServiceConnection() {
+	        
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            // TODO Auto-generated method stub
+            
+        }
+        
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // TODO Auto-generated method stub
+        	ReminderBinder binder = (ReminderBinder)service;
+            ReminderService bindService = binder.getService();
+        }
+    };
 }

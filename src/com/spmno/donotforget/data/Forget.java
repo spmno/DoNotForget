@@ -2,7 +2,7 @@ package com.spmno.donotforget.data;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class Forget {
+public class Forget implements Cloneable {
 	
 	@DatabaseField(generatedId=true)
 	private int id;
@@ -46,5 +46,16 @@ public class Forget {
 	}
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	
+	@Override
+	public Object clone() {
+		Forget forget = null;  
+        try{  
+        	forget = (Forget)super.clone();  
+        }catch(CloneNotSupportedException e) {  
+            e.printStackTrace();  
+        }  
+        return forget; 
 	}
 }
