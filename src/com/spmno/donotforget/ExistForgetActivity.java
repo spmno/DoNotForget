@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.j256.ormlite.dao.Dao;
-import com.spmno.donotforget.ReminderService.ReminderBinder;
 import com.spmno.donotforget.adapter.ExistForgetListAdapter;
 import com.spmno.donotforget.data.DataBaseHelper;
 import com.spmno.donotforget.data.Forget;
@@ -43,10 +42,6 @@ public class ExistForgetActivity extends Activity {
 			for (Forget forget : forgets) {
 				Map<String,Object> item = new HashMap<String,Object>();
 				item.put("name", forget.getName());
-				int hour = forget.getHour();
-				int minute = forget.getMinute();
-				String timeContent = String.format("%02d:%02d", hour, minute);
-				item.put("time", timeContent);
 				items.add(item);
 			}
 			forgetListViewAdapter = new ExistForgetListAdapter(

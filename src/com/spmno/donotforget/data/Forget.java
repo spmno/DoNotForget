@@ -8,13 +8,6 @@ public class Forget implements Cloneable {
 	private int id;
 	@DatabaseField(canBeNull=false, useGetSet=true)
 	private String name;
-	@DatabaseField(useGetSet=true)
-	private String place;
-
-	@DatabaseField(useGetSet=true)
-	private int hour;
-	@DatabaseField(useGetSet=true)
-	private int minute;
 	
 	
 	public int getId() {
@@ -29,25 +22,7 @@ public class Forget implements Cloneable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getHour() {
-		return hour;
-	}
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-	public int getMinute() {
-		return minute;
-	}
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
-	public String getPlace() {
-		return place;
-	}
-	public void setPlace(String place) {
-		this.place = place;
-	}
-	
+
 	@Override
 	public Object clone() {
 		Forget forget = null;  

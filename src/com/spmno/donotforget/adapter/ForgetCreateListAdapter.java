@@ -209,11 +209,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		Dao<Forget, Integer>forgetDao = databaseHelper.getForgetDao();
 		Forget forget = new Forget();
 		String remindName = remindNameEditText.getText().toString();
-		Integer minute = remindTimePicker.getCurrentMinute();
-		Integer hour = remindTimePicker.getCurrentHour();
 		forget.setName(remindName);
-		forget.setMinute(minute);
-		forget.setHour(hour);
 		
 		try {
 			forgetDao.create(forget);
