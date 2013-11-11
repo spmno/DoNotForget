@@ -1,6 +1,8 @@
 package com.spmno.donotforget;
 
 
+import com.spmno.donotforget.data.DataBaseHelper;
+
 import android.os.Bundle;
 import android.os.IBinder;
 import android.app.Activity;
@@ -29,6 +31,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		CrashHandler handler = CrashHandler.getInstance();
 		handler.init(getApplicationContext());
+		
+		DataBaseHelper.setContext(getApplicationContext());
 	}
 
 	@Override

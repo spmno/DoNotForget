@@ -12,11 +12,8 @@ import com.spmno.donotforget.data.DataBaseHelper;
 import com.spmno.donotforget.data.Forget;
 
 import android.os.Bundle;
-import android.os.IBinder;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,8 +45,8 @@ public class ExistForgetActivity extends Activity {
 					this, 
 					items, 
 					R.layout.list_exist_forget, 
-					new String[]{"name", "time"}, 
-					new int[]{R.id.forgetExistListItemTextView, R.id.forgetExistListItemTime});
+					new String[]{"name"}, 
+					new int[]{R.id.forgetExistListItemTextView});
 			forgetListView.setAdapter(forgetListViewAdapter);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

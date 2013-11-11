@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 
@@ -33,15 +32,9 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	private Activity context;
 	
 	// useful control
-	//NameViewHolder nameViewHolder = new NameViewHolder();
-	//TimeViewHolder timeViewHolder = new TimeViewHolder();
-	//PlaceViewHolder placeViewHolder = new PlaceViewHolder();
-	TimePicker remindTimePicker;
-	EditText remindPlaceNameEditText;
 	EditText remindNameEditText;
 	Button addForgetButton;
-	String remindName = "";
-	String remindPlace = "";
+	String remindName = "";	
 	
 	final int TYPE_LENGTH = 5;
 	final int NAME_TYPE = 0;
@@ -90,37 +83,14 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		if (groupPosition == 0) {
-			if (childPosition == 2) {
-				if (convertView == null) {
-					convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_time, null);
-					TextView remindTimeTitle = (TextView)convertView.findViewById(R.id.remindTextView);
-					//ImageView remindTimeIcon = (ImageView)linearLayout.findViewById(R.id.remindImageView);
-					if (remindTimePicker == null) {
-						remindTimePicker = (TimePicker)convertView.findViewById(R.id.remindTimePicker);
-					}
-					remindTimeTitle.setText(context.getString(R.string.time));
-				} 
-				return convertView;
-			} else if (childPosition == 1) {
-				if (convertView == null) {
-					convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_place, null);
-					//TextView remindPlaceTitle = (TextView)linearLayout.findViewById(R.id.placeTitleTextView);
-					//ImageView remindPlaceIcon = (ImageView)linearLayout.findViewById(R.id.placeTitleImageView);
-					if (remindPlaceNameEditText == null) {
-						remindPlaceNameEditText = (EditText)convertView.findViewById(R.id.placeName);
-					}
+			if (convertView == null) {
+				convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
+				//TextView remindEventTitle = (TextView)linearLayout.findViewById(R.id.eventTitleTextView);
+				if (remindNameEditText == null) {
+					remindNameEditText = (EditText)convertView.findViewById(R.id.forgetNameTextView);
 				}
-				return convertView;
-			} else if (childPosition == 0) {
-				if (convertView == null) {
-					convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_event, null);
-					//TextView remindEventTitle = (TextView)linearLayout.findViewById(R.id.eventTitleTextView);
-					if (remindNameEditText == null) {
-						remindNameEditText = (EditText)convertView.findViewById(R.id.forgetNameTextView);
-					}
-				}
-				return convertView;
 			}
+			return convertView;
 		} else if (groupPosition == 1) {
 			if (childPosition == forgetItemArrayList.size()) {
 				if (convertView == null) {
@@ -149,7 +119,7 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		//return childCount[groupPosition];
 		if (groupPosition == 0) {
-			return 3;
+			return 1;
 		} else {
 			return (forgetItemArrayList.size() + 1);
 		}
@@ -236,13 +206,11 @@ public class ForgetCreateListAdapter extends BaseExpandableListAdapter {
 	
 	public void saveControlData() {
 		remindName = remindNameEditText.getText().toString();
-		remindPlace = remindPlaceNameEditText.getText().toString();
 	}
 	
 	public void recoverControlData() {
-		if ((remindNameEditText != null) && (remindPlaceNameEditText != null)) {
+		if (remindNameEditText != null) {
 			remindNameEditText.setText(remindName);
-			remindPlaceNameEditText.setText(remindPlace);
 		}
 	}
 	
