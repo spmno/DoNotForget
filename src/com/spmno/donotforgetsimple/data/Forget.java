@@ -1,4 +1,4 @@
-package com.spmno.donotforget.data;
+package com.spmno.donotforgetsimple.data;
 
 import com.j256.ormlite.field.DatabaseField;
 

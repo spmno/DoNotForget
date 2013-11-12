@@ -1,14 +1,14 @@
-package com.spmno.donotforget.adapter;
+package com.spmno.donotforgetsimple.adapter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.j256.ormlite.dao.Dao;
-import com.spmno.donotforget.CreateForgetItemActivity;
-import com.spmno.donotforget.R;
-import com.spmno.donotforget.data.DataBaseHelper;
-import com.spmno.donotforget.data.Forget;
-import com.spmno.donotforget.data.ForgetItem;
+import com.spmno.donotforgetsimple.CreateForgetItemActivity;
+import com.spmno.donotforgetsimple.R;
+import com.spmno.donotforgetsimple.data.DataBaseHelper;
+import com.spmno.donotforgetsimple.data.Forget;
+import com.spmno.donotforgetsimple.data.ForgetItem;
 
 import android.app.Activity;
 import android.content.Intent;

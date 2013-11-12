@@ -1,4 +1,4 @@
-package com.spmno.donotforget;
+package com.spmno.donotforgetsimple;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 

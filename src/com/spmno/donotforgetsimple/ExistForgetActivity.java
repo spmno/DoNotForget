@@ -1,4 +1,4 @@
-package com.spmno.donotforget;
+package com.spmno.donotforgetsimple;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.j256.ormlite.dao.Dao;
-import com.spmno.donotforget.adapter.ExistForgetListAdapter;
-import com.spmno.donotforget.data.DataBaseHelper;
-import com.spmno.donotforget.data.Forget;
+import com.spmno.donotforgetsimple.adapter.ExistForgetListAdapter;
+import com.spmno.donotforgetsimple.data.DataBaseHelper;
+import com.spmno.donotforgetsimple.data.Forget;
 
 import android.os.Bundle;
 import android.app.Activity;

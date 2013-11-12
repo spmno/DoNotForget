@@ -1,7 +1,7 @@
-package com.spmno.donotforget;
+package com.spmno.donotforgetsimple;
 
 
-import com.spmno.donotforget.data.DataBaseHelper;
+import com.spmno.donotforgetsimple.data.DataBaseHelper;
 
 import android.os.Bundle;
 import android.os.IBinder;

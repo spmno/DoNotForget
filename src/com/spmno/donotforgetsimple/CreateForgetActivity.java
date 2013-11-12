@@ -1,6 +1,6 @@
-package com.spmno.donotforget;
+package com.spmno.donotforgetsimple;
 
-import com.spmno.donotforget.adapter.ForgetCreateListAdapter;
+import com.spmno.donotforgetsimple.adapter.ForgetCreateListAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;

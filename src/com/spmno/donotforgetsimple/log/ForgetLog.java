@@ -1,4 +1,4 @@
-package com.spmno.donotforget.log;
+package com.spmno.donotforgetsimple.log;
 
 public class ForgetLog {
 	

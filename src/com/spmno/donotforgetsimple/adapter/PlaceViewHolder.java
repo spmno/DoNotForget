@@ -1,4 +1,4 @@
-package com.spmno.donotforget.adapter;
+package com.spmno.donotforgetsimple.adapter;
 
 import android.widget.EditText;
 import android.widget.ImageView;

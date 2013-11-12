@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     <Button
         android:id="@+id/addForgetItemButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="@string/add_forget"
         android:background="@drawable/list_button_background"

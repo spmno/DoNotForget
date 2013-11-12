@@ -1,4 +1,4 @@
-package com.spmno.donotforget.adapter;
+package com.spmno.donotforgetsimple.adapter;
 
 import java.util.List;
 import java.util.Map;
