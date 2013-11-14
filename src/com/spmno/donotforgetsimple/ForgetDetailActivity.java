@@ -32,14 +32,15 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 	private ListView forgetDetailListView;
 	private SimpleAdapter forgetDetailListViewAdapter;
 	private String currentForgetName;
-	GestureDetector listDetector;
+	private GestureDetector listDetector;
+	private ArrayList<Integer> forgetItemIdList;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_forget_detail);
-
+		
 		forgetDetailListView = (ListView)findViewById(R.id.forgetDetailListView);
 		Intent intent = getIntent();
 		String forgetName = intent.getStringExtra("name");
@@ -52,6 +53,7 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 	
 	private void refreshList(String forgetName) {
 		setTitle(forgetName);
+		forgetItemIdList = new ArrayList<Integer>();
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<ForgetItem, Integer> forgetItemDao = databaseHelper.getForgetItemDao();
 		Dao<Forget, Integer> forgetDao = databaseHelper.getForgetDao();
@@ -65,6 +67,7 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 				Map<String,Object> item = new HashMap<String,Object>();
 				item.put("name", forgetItem.getName());
 				items.add(item);
+				forgetItemIdList.add(forgetItem.getId());
 			}
 
 			forgetDetailListViewAdapter = new ForgetDetailAdapter(this, items, R.layout.list_detail_forget, new String[]{"name", "isSelect"}, new int[]{R.id.forgetDetailTextView, R.id.forgetDetailCheckBox});
@@ -115,6 +118,8 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 		int e2Position = forgetDetailListView.pointToPosition((int)e2X, (int)e2Y);
 		if (e1Position == e2Position) {
 			Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+			deleteForgetItem(e1Position);
+			forgetDetailListViewAdapter.notifyDataSetChanged();
 		}
 		return false;
 	}
@@ -144,6 +149,17 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 		return false;
 	} 
 	
-
+	private boolean deleteForgetItem(int position) {
+		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
+		Dao<ForgetItem, Integer> forgetItemDao = databaseHelper.getForgetItemDao();
+		try {
+			forgetItemDao.deleteById(forgetItemIdList.get(position));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }
