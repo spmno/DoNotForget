@@ -17,15 +17,23 @@ import com.spmno.donotforgetsimple.data.ForgetItem;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
-public class ForgetDetailActivity extends Activity {
+public class ForgetDetailActivity extends Activity implements OnTouchListener, OnGestureListener  {
 
 	private ListView forgetDetailListView;
 	private SimpleAdapter forgetDetailListViewAdapter;
 	private String currentForgetName;
+	GestureDetector listDetector;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,7 @@ public class ForgetDetailActivity extends Activity {
 		if (!forgetName.isEmpty()) {
 			currentForgetName = forgetName;
 		}
+		listDetector = new GestureDetector(this, this);
 		refreshList(currentForgetName);
 	}
 	
@@ -60,6 +69,7 @@ public class ForgetDetailActivity extends Activity {
 
 			forgetDetailListViewAdapter = new ForgetDetailAdapter(this, items, R.layout.list_detail_forget, new String[]{"name", "isSelect"}, new int[]{R.id.forgetDetailTextView, R.id.forgetDetailCheckBox});
 			forgetDetailListView.setAdapter(forgetDetailListViewAdapter);
+			forgetDetailListView.setOnTouchListener(this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,5 +88,62 @@ public class ForgetDetailActivity extends Activity {
 		super.onResume();
 		refreshList(currentForgetName);
 	}
+	
+	@Override  
+    public boolean onTouch(View v, MotionEvent event) {  
+        // TODO Auto-generated method stub  
+        listDetector.onTouchEvent(event);  
+        return false;  
+    }
+
+	//OnGestureListener method
+	@Override
+	public boolean onDown(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+		// TODO Auto-generated method stub
+		int e1X = (int)e1.getX();
+		int e1Y = (int)e1.getY();
+		int e2X = (int)e2.getX();
+		int e2Y = (int)e2.getY();
+		int e1Position = forgetDetailListView.pointToPosition((int)e1X, (int)e1Y);
+		int e2Position = forgetDetailListView.pointToPosition((int)e2X, (int)e2Y);
+		if (e1Position == e2Position) {
+			Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+		}
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	} 
+	
+
 
 }
