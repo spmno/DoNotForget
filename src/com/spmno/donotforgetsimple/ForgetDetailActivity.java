@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -27,7 +28,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ForgetDetailActivity extends Activity implements OnTouchListener, OnGestureListener  {
+public class ForgetDetailActivity extends Activity implements OnDoubleTapListener, OnTouchListener, OnGestureListener  {
 
 	private ListView forgetDetailListView;
 	private SimpleAdapter forgetDetailListViewAdapter;
@@ -48,6 +49,7 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 			currentForgetName = forgetName;
 		}
 		listDetector = new GestureDetector(this, this);
+		listDetector.setOnDoubleTapListener(this);
 		refreshList(currentForgetName);
 	}
 	
@@ -149,6 +151,12 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 		return false;
 	} 
 	
+	@Override
+	public boolean onDoubleTap(MotionEvent e) {
+		
+		return true;
+	}
+	
 	private boolean deleteForgetItem(int position) {
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<ForgetItem, Integer> forgetItemDao = databaseHelper.getForgetItemDao();
@@ -160,6 +168,18 @@ public class ForgetDetailActivity extends Activity implements OnTouchListener, O
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean onDoubleTapEvent(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onSingleTapConfirmed(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
