@@ -1,5 +1,6 @@
 package com.spmno.donotforgetsimple.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 
@@ -22,12 +24,14 @@ public class ForgetDetailAdapter extends SimpleAdapter {
 
 	Button addForgetButton;
 	private Context context;
+	ArrayList<EditText> editTextList;
 	
 	public ForgetDetailAdapter(Context context,
 			List<? extends Map<String, ?>> data, int resource, String[] from,
 			int[] to) {
 		super(context, data, resource, from, to);
 		this.context = context;
+		editTextList = new ArrayList<EditText>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -41,13 +45,25 @@ public class ForgetDetailAdapter extends SimpleAdapter {
 				addForgetButton.setOnClickListener(new CreateButtonListener());
 			}
 			return convertView;
+		} else {
+			if (convertView == null) {
+				convertView = super.getView(position, convertView, parent);
+				convertView = (LinearLayout)convertView;
+				EditText editText = (EditText)convertView.findViewById(R.id.forgetDetailTextView);
+				editText.setEnabled(false);
+			}
+			return convertView;
 		}
-		return super.getView(position, convertView, parent);
+		//return super.getView(position, convertView, parent);
 	}
 	
 	@Override
 	public int getCount() {
 		return super.getCount() + 1;
+	}
+	
+	public void changeEditTextStatus(int postion) {
+		
 	}
 	
 	class CreateButtonListener implements OnClickListener {

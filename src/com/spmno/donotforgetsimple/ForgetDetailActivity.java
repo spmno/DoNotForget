@@ -153,7 +153,9 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 	
 	@Override
 	public boolean onDoubleTap(MotionEvent e) {
-		
+		int x = (int)e.getX();
+		int y = (int)e.getY();
+		int position = forgetDetailListView.pointToPosition((int)x, (int)y);
 		return true;
 	}
 	
