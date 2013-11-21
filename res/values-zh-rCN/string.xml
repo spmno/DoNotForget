@@ -17,6 +17,7 @@
 	<string name="trip">旅游</string>
 	<string name="other">其它</string>
 	<string name="new_reminder">新提醒</string>
+	<string name="delete_success">删除成功</string>
 	<string name="title_activity_create_forget_item">新建物件</string>
     <string name="title_activity_exist_forget">现有Forget</string>
     <string name="title_activity_forget_detail">Forget物件</string>

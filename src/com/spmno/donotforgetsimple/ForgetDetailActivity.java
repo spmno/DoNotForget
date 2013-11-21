@@ -121,7 +121,8 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 		int e1Position = forgetDetailListView.pointToPosition((int)e1X, (int)e1Y);
 		int e2Position = forgetDetailListView.pointToPosition((int)e2X, (int)e2Y);
 		if (e1Position == e2Position) {
-			Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+			String deleteNote = this.getString(R.string.delete_success);
+			Toast.makeText(this, deleteNote, Toast.LENGTH_SHORT).show();
 			deleteForgetItem(e1Position);
 			items.remove(e1Position);
 			forgetDetailListViewAdapter.notifyDataSetChanged();
