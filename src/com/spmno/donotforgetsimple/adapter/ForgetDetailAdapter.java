@@ -1,6 +1,7 @@
 package com.spmno.donotforgetsimple.adapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +20,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class ForgetDetailAdapter extends SimpleAdapter {
 
 	Button addForgetButton;
 	private Context context;
-	ArrayList<EditText> editTextList;
+	Map<Integer, EditText> editTextContainer;
 	
 	public ForgetDetailAdapter(Context context,
 			List<? extends Map<String, ?>> data, int resource, String[] from,
 			int[] to) {
 		super(context, data, resource, from, to);
 		this.context = context;
-		editTextList = new ArrayList<EditText>();
+		editTextContainer = new HashMap<Integer, EditText>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,19 +41,16 @@ public class ForgetDetailAdapter extends SimpleAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		int lastPosition = getCount() - 1;
 		if (position == lastPosition) {
-			if (convertView == null) {
-				convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_add, null);
-				addForgetButton = (Button)convertView.findViewById(R.id.addForgetItemButton);
-				addForgetButton.setOnClickListener(new CreateButtonListener());
-			}
+			convertView = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.child_create_forget_add, null);
+			addForgetButton = (Button)convertView.findViewById(R.id.addForgetItemButton);
+			addForgetButton.setOnClickListener(new CreateButtonListener());
 			return convertView;
 		} else {
-			if (convertView == null) {
-				convertView = super.getView(position, convertView, parent);
-				convertView = (LinearLayout)convertView;
-				EditText editText = (EditText)convertView.findViewById(R.id.forgetDetailTextView);
-				editText.setEnabled(false);
-			}
+			convertView = super.getView(position, convertView, parent);
+			convertView = (LinearLayout)convertView;
+			//TextView editText = (TextView)convertView.findViewById(R.id.forgetDetailTextView);
+				//editTextContainer.put(position, editText);
+				//editText.setEnabled(false);
 			return convertView;
 		}
 		//return super.getView(position, convertView, parent);
@@ -63,7 +62,8 @@ public class ForgetDetailAdapter extends SimpleAdapter {
 	}
 	
 	public void changeEditTextStatus(int postion) {
-		
+		EditText changeEditText = editTextContainer.get(postion);
+		changeEditText.setEnabled(true);
 	}
 	
 	class CreateButtonListener implements OnClickListener {

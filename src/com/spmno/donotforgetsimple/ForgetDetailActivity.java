@@ -35,6 +35,7 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 	private String currentForgetName;
 	private GestureDetector listDetector;
 	private ArrayList<Integer> forgetItemIdList;
+	ArrayList<Map<String, Object>> items;
 	
 	
 	@Override
@@ -56,6 +57,7 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 	private void refreshList(String forgetName) {
 		setTitle(forgetName);
 		forgetItemIdList = new ArrayList<Integer>();
+		items = new ArrayList<Map<String, Object>>();
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<ForgetItem, Integer> forgetItemDao = databaseHelper.getForgetItemDao();
 		Dao<Forget, Integer> forgetDao = databaseHelper.getForgetDao();
@@ -64,7 +66,7 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 			ForgetDataCache.getInstance().setCurrentForget(forget);
 			Integer forgetId = forget.getId();
 			List<ForgetItem> forgetItems = forgetItemDao.queryForEq("forgetId_id", forgetId);
-			ArrayList<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+			
 			for (ForgetItem forgetItem : forgetItems) {
 				Map<String,Object> item = new HashMap<String,Object>();
 				item.put("name", forgetItem.getName());
@@ -121,6 +123,7 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 		if (e1Position == e2Position) {
 			Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
 			deleteForgetItem(e1Position);
+			items.remove(e1Position);
 			forgetDetailListViewAdapter.notifyDataSetChanged();
 		}
 		return false;
@@ -156,6 +159,7 @@ public class ForgetDetailActivity extends Activity implements OnDoubleTapListene
 		int x = (int)e.getX();
 		int y = (int)e.getY();
 		int position = forgetDetailListView.pointToPosition((int)x, (int)y);
+		((ForgetDetailAdapter) forgetDetailListViewAdapter).changeEditTextStatus(position);
 		return true;
 	}
 	
