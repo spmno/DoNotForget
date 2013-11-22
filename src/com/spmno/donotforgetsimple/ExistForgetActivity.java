@@ -15,6 +15,7 @@ import com.spmno.donotforgetsimple.data.ForgetItem;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ExistForgetActivity extends Activity implements OnDoubleTapListener
 	private ExistForgetListAdapter forgetListViewAdapter;
 	private ArrayList<Integer> forgetIdList;
 	ArrayList<Map<String, Object>> items;
+	private GestureDetector listDetector;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class ExistForgetActivity extends Activity implements OnDoubleTapListener
 		forgetIdList = new ArrayList<Integer>();
 		forgetListView = (ListView)findViewById(R.id.forgetListView);
 		forgetListView.setOnItemClickListener(new ExistItemClickListener());
+		forgetListView.setOnTouchListener(this);
 		DataBaseHelper databaseHelper = DataBaseHelper.getInstance();
 		Dao<Forget, Integer> forgetDao = databaseHelper.getForgetDao();
 		try {
@@ -58,6 +61,7 @@ public class ExistForgetActivity extends Activity implements OnDoubleTapListener
 					new String[]{"name"}, 
 					new int[]{R.id.forgetExistListItemTextView});
 			forgetListView.setAdapter(forgetListViewAdapter);
+			listDetector = new GestureDetector(this, this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,7 +153,8 @@ public class ExistForgetActivity extends Activity implements OnDoubleTapListener
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
-		return false;
+        listDetector.onTouchEvent(event);  
+        return false;  
 	}
 
 	@Override
