@@ -4,6 +4,7 @@
     <string name="action_settings">设置</string>
     <string name="add_forget">增加Forget</string>
     <string name="exist_forget">现有Forget</string>
+    <string name="delete_forget">删除Forget</string>
     <string name="title_activity_create_forget">新建Forget</string>
     <string name="complete">完成</string>
     <string name="name">提醒名称</string>
