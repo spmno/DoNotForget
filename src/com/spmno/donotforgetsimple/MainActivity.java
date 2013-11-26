@@ -24,13 +24,14 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		Button createNewForgetButton = (Button)findViewById(R.id.addForgetButton);
 		Button existForgetButton = (Button)findViewById(R.id.existForgetButton);
-		
+		Button deleteForgetButton = (Button)findViewById(R.id.deleteForgetButton);
 		createNewForgetButton.setOnClickListener(this);
 		existForgetButton.setOnClickListener(this);
+		deleteForgetButton.setOnClickListener(this);
 		//startService(new Intent(this, ReminderService.class));
 
-		CrashHandler handler = CrashHandler.getInstance();
-		handler.init(getApplicationContext());
+		//CrashHandler handler = CrashHandler.getInstance();
+		//handler.init(getApplicationContext());
 		
 		DataBaseHelper.setContext(getApplicationContext());
 	}
@@ -54,6 +55,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.existForgetButton: {
 			Intent intent = new Intent();
 			intent.setClass(this, ExistForgetActivity.class);
+			startActivity(intent);
+			break;
+		}
+		case R.id.deleteForgetButton: {
+			Intent intent = new Intent();
+			intent.setClass(this, DeleteForgetActivity.class);
 			startActivity(intent);
 			break;
 		}

@@ -21,8 +21,12 @@
     <string name="other">Other</string>
     <string name="new_reminder">New Reminder</string>
     <string name="delete_success">Delete Success</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_hint">Do you delete forget?</string>
     <string name="title_activity_create_forget_item">CreateForgetItemActivity</string>
     <string name="title_activity_exist_forget">ExistForgetActivity</string>
     <string name="title_activity_forget_detail">ForgetDetailActivity</string>
+    <string name="title_activity_delete_forget">DeleteForgetActivity</string>
 
 </resources>

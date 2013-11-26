@@ -13,30 +13,30 @@
         android:id="@+id/deleteForgetButton"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/existForgetButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_alignLeft="@+id/existForgetButton"
+        android:layout_below="@+id/existForgetButton"
+        android:layout_marginTop="28dp"
         android:background="@drawable/main_forget_button_selector"
         android:text="@string/delete_forget" />
-
-    <Button
-        android:id="@+id/addForgetButton"
-        android:layout_width="200dp"
-        android:layout_height="55dp"
-        android:layout_alignLeft="@+id/existForgetButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="85dp"
-        android:background="@drawable/main_forget_button_selector"
-        android:text="@string/add_forget" />
 
     <Button
         android:id="@+id/existForgetButton"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/deleteForgetButton"
         android:layout_alignLeft="@+id/addForgetButton"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/addForgetButton"
+        android:layout_marginTop="24dp"
         android:background="@drawable/main_forget_button_selector"
         android:text="@string/exist_forget" />
+
+    <Button
+        android:id="@+id/addForgetButton"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp"
+        android:background="@drawable/main_forget_button_selector"
+        android:text="@string/add_forget" />
 
 </RelativeLayout>
