@@ -75,6 +75,7 @@ public class DeleteForgetActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
+			deletePosition = position;
 			String confirmText = getString(R.string.confirm);
 			String cancelText = getString(R.string.cancel);
 			String deleteHintText = getString(R.string.delete_hint);
@@ -85,7 +86,10 @@ public class DeleteForgetActivity extends Activity {
 	            @Override   
 	            public void onClick(DialogInterface dialog, int which) {   
 	            // 点击“确认”后的操作   
-	            	deleteForget();    
+	            	if (deleteForget()) {
+	            		deleteListItem();
+	            		forgetListViewAdapter.notifyDataSetChanged();
+	            	}
 	            }   
 	        })   
 	        .setNegativeButton(cancelText, new DialogInterface.OnClickListener() {   
@@ -98,6 +102,10 @@ public class DeleteForgetActivity extends Activity {
 	        //super.onBackPressed(); 
 		}
 		
+	}
+	
+	private void deleteListItem() {
+		items.remove(deletePosition);
 	}
 	
 	private boolean deleteForget() {
