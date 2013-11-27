@@ -25,4 +25,5 @@
 	<string name="title_activity_create_forget_item">新建物件</string>
     <string name="title_activity_exist_forget">现有Forget</string>
     <string name="title_activity_forget_detail">Forget物件</string>
+    <string name="title_activity_delete_forget">删除Forget</string>
 </resources>
